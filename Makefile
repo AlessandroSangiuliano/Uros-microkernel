@@ -13,6 +13,7 @@ all: ./bin/boot.bin ./bin/kernel.bin
 	i686-elf-gcc $(FLAGS) -T ./src/linker.ld -o ./bin/kernel.bin -ffreestanding -O0 -nostdlib ./build/kernelfull.o
 
 ./bin/boot.bin: ./src/boot/boot.asm
+	mkdir -p ./bin
 	nasm -f bin ./src/boot/boot.asm -o ./bin/boot.bin
 
 ./build/kernel.asm.o: ./src/kernel.asm

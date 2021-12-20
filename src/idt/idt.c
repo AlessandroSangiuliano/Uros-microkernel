@@ -1,0 +1,62 @@
+#include "idt.h"
+#include "config.h"
+#include "memory/memory.h"
+#include "kernel.h"
+#include "io/io.h"
+
+struct idt_descr32 descriptors[MAX_INTERRUPTS];
+struct idtr_descr32 idtr_descriptor;
+
+extern void idt_load(struct idtr_descr32 *ptr);
+extern void int21h();
+extern void no_interrupt();
+
+void no_interrupt_handler()
+{
+    outb(0x20, 0x20);
+}
+
+void int21h_handler()
+{
+    kprintf("Key pressed!\n");
+    outb(0x20, 0x20);
+}
+
+void idt_zero()
+{
+    kprintf("Divide by zero error\n");
+}
+
+void idt_uno()
+{
+    kprintf("Scemo pagliaccio!\n");
+}
+
+void idt_set(int interrupt_number, void *address)
+{
+    struct idt_descr32 *descr = &descriptors[interrupt_number];
+    descr->lower_bits_offset =  (uint32_t) address & 0x0000ffff; 
+    descr->segment_selector = KERNEL_CODE_SELECTOR;
+    descr->zero = 0x00;
+    descr->type_attributes = 0xEE;
+    descr->upper_bits_offset = (uint32_t) address >> 16;
+}
+
+void idt_init()
+{
+    memset(descriptors, 0, sizeof(descriptors));
+    idtr_descriptor.limit = sizeof(descriptors) - 1;
+    idtr_descriptor.base = (uint32_t) descriptors;
+
+    for (size_t i = 0; i < MAX_INTERRUPTS; i++)
+    {
+        idt_set(i, no_interrupt);
+    }
+    
+
+    idt_set(0, idt_zero);
+    idt_set(0x21, int21h);
+    // Load descriptor table
+
+    idt_load(&idtr_descriptor); 
+}

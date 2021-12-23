@@ -3,6 +3,8 @@
 
 #include <stddef.h>
 #include <stdint.h>
+#include <stdbool.h>
+#include "status.h"
 
 #define PAGING_CACHE_DISABLED   0b00010000
 #define PAGING_WRITE_THROUGH    0b00001000

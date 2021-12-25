@@ -68,7 +68,7 @@ int paging_set(uint32_t *directory, void *virtual_address, uint32_t val)
 
     if (!paging_is_aligned(virtual_address))
     {
-        res = - EINVARG;
+        res = -EINVARG;
         return res;
     }
 
@@ -84,6 +84,11 @@ int paging_set(uint32_t *directory, void *virtual_address, uint32_t val)
     // entry contains the pointer to the page table
     uint32_t entry = directory[directory_index];
 
-    uint32_t *table = (uint32_t*) (entry &)
+    uint32_t *table = (uint32_t*) (entry & 0xfffff000); //bitwise and to get only the address of the entry
+
+    table[table_index] = val; 
+
+    // return zero for now, just a stub
+    return 0;
     
 }

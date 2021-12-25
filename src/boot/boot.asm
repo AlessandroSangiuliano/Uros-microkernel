@@ -1,3 +1,9 @@
+; @author Alex Sangiuliano
+; @email alex22_7@hotmail.com
+; @create date 2021-12-25 17:49:43
+; @modify date 2021-12-25 17:49:43
+; @desc [description]
+
 ORG 0x7c00
 BITS 16
 

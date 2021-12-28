@@ -4,3 +4,5 @@ bin/
 *.o
 
 build/
+
+line_counter.sh

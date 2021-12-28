@@ -1,3 +1,11 @@
+/**
+ * @author Alex Sangiuliano
+ * @email alex22_7@hotmail.com
+ * @create date 2021-12-26 10:58:42
+ * @modify date 2021-12-26 10:58:42
+ * @desc [description]
+ */
+
 #ifndef CONFIG_H
 #define CONFIG_H
 
@@ -12,6 +20,8 @@
 #define HEAP_ADDRESS    0x01000000
 #define HEAP_TABLE_ADDRESS 0x00007E00
 
-#define SECTOR_SIZE 512
+#define UROS_SECTOR_SIZE 512
+#define UROS_MAX_FILESYSTEMS 12
+#define UROS_MAX_FILE_DESCRIPTORS 512
 
 #endif

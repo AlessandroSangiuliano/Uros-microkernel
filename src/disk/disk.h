@@ -9,9 +9,12 @@
 #ifndef DISK_H
 #define DISK_H
 
+#include "fs/file.h"
+
 // this is a physical hard disk
 
 #define DISK_TYPE_REAL 0
+
 
 typedef unsigned int disk_type;
 
@@ -19,6 +22,8 @@ struct disk
 {
     disk_type type;
     int sector_size;
+
+    struct filesystem *filesystem;
 };
 
 struct disk* disk_get(int index);

@@ -36,6 +36,22 @@ int strnlen(const char *ptr, int max)
     
 }
 
+char *strcpy(char* dest, const char* source)
+{
+    char *res = dest;
+    
+    while (*source != 0)
+    {
+        *dest = *source;
+        dest += 1;
+        source += 1;
+    }
+
+    *dest = 0x00;
+    
+    return res;
+}
+
 bool is_digit(char c)
 {
     return c >= 48 && c <= 57;

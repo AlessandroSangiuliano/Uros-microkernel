@@ -15,6 +15,7 @@
 #include "memory/paging/paging.h"
 #include "disk/disk.h"
 #include "fs/pparser.h"
+#include "fs/file.h"
 #include "string/string.h"
 #include "disk/streamer.h"
 
@@ -75,9 +76,6 @@ void kprintf(const char *str)
     }
 }
 
-extern void problem();
-extern void uno();
-
 static struct paging_4gb_chunck *kernel_chunk = 0;
 
 void kernel_main()
@@ -87,6 +85,9 @@ void kernel_main()
 
     // init heap
     kheap_init();
+
+    // init filesystems
+    fs_init();
 
     // Search disk and init
 
@@ -132,10 +133,14 @@ void kernel_main()
     
     //struct path_root *root_path = pathparser_parse("0:/bin/shell.exe", NULL);
 
-    struct disk_stream *stream = diskstreamer_new(0);
+    /*struct disk_stream *stream = diskstreamer_new(0);
     diskstreamer_seek(stream, 0x201);
     unsigned char c = 0;
-    diskstreamer_read(stream, &c, 1);
+    diskstreamer_read(stream, &c, 1);*/
+
+    /*char gnogno[20];
+    char *lel = strcpy(gnogno, "riptitipi");
+    kprintf(lel);*/
 
     while (1)
     {

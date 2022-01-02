@@ -20,7 +20,6 @@
 #define UROS_FAT16_BAD_SECTOR 0xFF7
 #define UROS_FAT16_UNUSED 0x00
 
-typedef unsigned int FAT_ITEM_TYPE;
 #define FAT_ITEM_TYPE_DIRECTORY 0
 #define FAT_ITEM_TYPE_FILE 1
 
@@ -33,6 +32,8 @@ typedef unsigned int FAT_ITEM_TYPE;
 #define FAT_FILE_ARCHIVED 0x20
 #define FAT_FILE_DEVICE 0x40
 #define FAT_FILE_RESERVED 0x80
+
+typedef unsigned int FAT_ITEM_TYPE;
 
 struct fat_header_extended
 {
@@ -280,7 +281,7 @@ int fat16_resolve(struct disk *disk)
         return res;
     }
 
-    if (fat_private->header.shared.extended_header.signature != 0x29)
+    if (fat_private->header.shared.extended_header.signature != UROS_FAT16_SIGNATURE)
     {
         res = -EFSNOTUS;
         close_stream(stream, fat_private, res, disk);

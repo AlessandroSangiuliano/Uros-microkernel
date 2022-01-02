@@ -15,6 +15,7 @@
 struct disk;
 
 typedef unsigned int FILE_SEEK_MODE;
+
 enum
 {
     SEEK_SET,

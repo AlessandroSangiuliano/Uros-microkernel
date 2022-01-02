@@ -14,10 +14,16 @@
 
 #define UROS_MAX_PATH 108
 
+#define ERROR(value) (void*)value
+#define ERROR_I(value) (int)value
+#define ISERR(value) ((int)value < 0) 
+
 void kernel_main();
 
 void kprintf(const char *str);
 void kputchar(int col, int row, char c, char colour);
 void clean_screen();
+
+
 
 #endif
